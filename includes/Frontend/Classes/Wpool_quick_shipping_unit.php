@@ -12,11 +12,16 @@ class Wpool_quick_shipping_unit{
      * FrontEnd Constructor
      */
     public function __construct(){
-        add_filter( 'woocommerce_get_price_html', [ $this,  'bbloomer_alter_price_display' ], 9999, 2 );
-        add_action( 'woocommerce_before_calculate_totals', [ $this, 'bbloomer_alter_price_cart' ], 9999 );
+        add_filter( 'woocommerce_get_price_html', [ $this,  'wppool_qs_alter_price_display' ], 9999, 2 );
+        add_action( 'woocommerce_before_calculate_totals', [ $this, 'wppool_qs_alter_price_cart' ], 9999 );
+        add_action( 'woocommerce_before_add_to_cart_form', [ $this, 'wppool_qs_get_shipping_value' ] );
+    }
+
+    public function wppool_qs_get_shipping_value( $product ){
+        echo "hello";
     }
  
-    public function bbloomer_alter_price_display( $price_html, $product ) {
+    public function wppool_qs_alter_price_display( $price_html, $product ) {
         
         // ONLY ON FRONTEND
         if ( is_admin() ) 
@@ -39,7 +44,7 @@ class Wpool_quick_shipping_unit{
 
 
  
-    public function bbloomer_alter_price_cart( $cart ) {
+    public function wppool_qs_alter_price_cart( $cart ) {
 
     
         // LOOP THROUGH CART ITEMS & APPLY 20% DISCOUNT
