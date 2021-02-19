@@ -84,9 +84,6 @@ final class wppool_quick_shipping {
     /**
      * Load Textdomain
      *
-     * Load plugin localization files.
-     *
-     * Fired by `init` action hook.
      *
      * @since 1.0.0
      *
