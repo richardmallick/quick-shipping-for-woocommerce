@@ -5,7 +5,7 @@
  * Plugin URI:        https://wppool.dev
  * Description:       This is Quick Shipping for woocommerce.
  * Version:           1.0.0
- * Author:            Richard
+ * Author:            WPPool
  * Author URI:        https://wppool.dev
  * Text Domain:       quick-shipping-for-woocommerce
  * License:           GPL v2 or later
