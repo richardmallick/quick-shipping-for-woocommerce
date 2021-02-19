@@ -12,7 +12,7 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
-if( ! defined('ABSPATH') ){
+if ( ! defined('ABSPATH') ) {
     exit;
 }
 
@@ -75,9 +75,7 @@ final class wppool_quick_shipping {
         static $instance = false;
 
         if ( ! $instance ) {
-
             $instance = new self();
-
         }
 
         return $instance;
