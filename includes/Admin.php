@@ -11,5 +11,6 @@ class Admin{
     {
         new Admin\Menu();
         new Admin\Notice();
+        new Admin\Classes\Wppool_quick_shipping();
     }
 }

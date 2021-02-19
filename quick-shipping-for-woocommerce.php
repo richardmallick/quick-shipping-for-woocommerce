@@ -147,6 +147,8 @@ final class wppool_quick_shipping {
             new WPPool\QS\Frontend();
         }
 
+        new WPPool\QS\Assets();
+
     }
     
     /**

@@ -18,6 +18,14 @@ class Menu {
     }
 
     public function wppool_qs_plugin_page(){
-        echo "Hello World";
+
+        wp_enqueue_style("wppool-qs-admin-style"); // Enqueue admin Style
+        wp_enqueue_style("wppool-qs-fontello-style");// Enqueue fontello Style
+
+        wp_enqueue_script("wppool-qs-admin-js");// Enqueue Admin Js
+
+        if (file_exists(__DIR__ . "/views/wppool-qs-admin-tabs.php")) {
+            include __DIR__ . "/views/wppool-qs-admin-tabs.php";
+        }
     }
 }
