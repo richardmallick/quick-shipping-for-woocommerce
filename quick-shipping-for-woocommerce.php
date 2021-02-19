@@ -70,11 +70,11 @@ final class wppool_quick_shipping {
     *
     * @return /wppool_quick_shipping
     */
-    public static function init(  ){
+    public static function init(){
 
         static $instance = false;
 
-        if( ! $instance ){
+        if ( ! $instance ) {
 
             $instance = new self();
 
@@ -126,7 +126,7 @@ final class wppool_quick_shipping {
 
         $installed = get_option('wppool_qs_installed');
 
-        if( ! $installed ){
+        if ( ! $installed ) {
             update_option('wppool_qs_installed', time() );
         }
 
@@ -141,9 +141,9 @@ final class wppool_quick_shipping {
      */
     public function init_plugin(){
 
-        if( is_admin() ){
+        if ( is_admin() ) {
             new WPPool\QS\Admin();
-        }else{
+        } else {
             new WPPool\QS\Frontend();
         }
 
@@ -171,16 +171,16 @@ final class wppool_quick_shipping {
      */
     public static function wppool_qs_action_links($links) {
 
-        if (!current_user_can('manage_options')) {
+        if ( ! current_user_can('manage_options') ) {
             return $links;
         }
 
-        $links = array_merge([
+        $links = array_merge( [
             sprintf('<a href="%s">%s</a>',
                     admin_url('admin.php?page=quick-shipping-for-woocommerce'),
                     esc_html__('Settings', WPPOOL_QS_TEXTDOMAIN)
             )
-                ], $links);
+                ], $links );
         return $links;
     }
     
