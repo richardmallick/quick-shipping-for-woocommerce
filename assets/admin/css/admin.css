@@ -91,11 +91,11 @@
     box-shadow: 0 8px 21px 0 rgba(0,0,0,.1);  
 }
 
-.wppool-qs-tab-content .tab-item {
+.wppool-qs-tab-content .tab-item{
     display: none;
 }
 
-.wppool-qs-tab-content .tab-item.active {
+.wppool-qs-tab-content .tab-item.active{
     display: block;
 }
 
@@ -106,13 +106,13 @@
 /* End Tabs */
 
 /* Switch Design */
-.WPTE_thankyou_custom_checkbox {
+.wppool_qs_switch_checkbox {
     display: flex;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
 }
   
-.WPTE_thankyou_custom_checkbox i {
+.wppool_qs_switch_checkbox i {
     position: relative;
     display: inline-block;
     margin-right: 1rem;
@@ -124,7 +124,7 @@
     transition: all 0.3s linear;
 }
   
-.WPTE_thankyou_custom_checkbox i::before {
+.wppool_qs_switch_checkbox i::before {
     content: "";
     position: absolute;
     left: 0;
@@ -136,7 +136,7 @@
     transition: all 0.25s linear;
 }
   
-.WPTE_thankyou_custom_checkbox i::after {
+.wppool_qs_switch_checkbox i::after {
     content: "";
     position: absolute;
     left: 0;
@@ -149,29 +149,167 @@
     transition: all 0.2s ease-in-out;
 }
   
-.WPTE_thankyou_custom_checkbox:active i::after {
+.wppool_qs_switch_checkbox:active i::after {
     width: 28px;
     transform: translate3d(2px, 2px, 0);
 }
   
-.WPTE_thankyou_custom_checkbox:active input:checked + i::after { 
+.wppool_qs_switch_checkbox:active input:checked + i::after { 
     transform: translate3d(16px, 2px, 0); 
 }
   
-.WPTE_thankyou_custom_checkbox input { 
+.wppool_qs_switch_checkbox input { 
     display: none; 
 }
   
-.WPTE_thankyou_custom_checkbox input:checked + i { 
+.wppool_qs_switch_checkbox input:checked + i { 
     background-color: #9B5C8F; 
     background-image: -webkit-linear-gradient(-169deg, #9B5C8F 0%, #9B5C8F 100%);
 }
   
-.WPTE_thankyou_custom_checkbox input:checked + i::before {
+.wppool_qs_switch_checkbox input:checked + i::before {
     transform: translate3d(18px, 2px, 0) scale3d(0, 0, 0); 
 }
   
-.WPTE_thankyou_custom_checkbox input:checked + i::after { 
+.wppool_qs_switch_checkbox input:checked + i::after { 
     transform: translate3d(26px, 2px, 0); 
 }
+/* End Switch */
 
+/* Accordion */
+.wppool-add-shipping-title{
+    margin-bottom: 20px;
+}
+
+.wppool-shipping-details input[type=text], 
+.wppool-shipping-details input[type=number]{
+    margin-top: 8px;
+}
+
+.wppool-add-shipping-accordion{
+    padding: 20px;
+    background-color: #e2e2e2;
+}
+.wppool-add-shipping-options{
+    background: #fff;
+    padding: 15px 15px 1px 15px;
+}
+.wppool-add-shipping-area{
+    overflow: hidden;
+    border: 1px solid rgb(169 169 169);
+    background: #ddd;
+    margin-bottom: 15px;
+}
+.wppool-add-shipping-accordion-header{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 7px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.wppool-add-shipping-accordion-header:hover{
+    background: #cecece;
+}
+.wppool-add-shipping-accordion-delete-btn{
+    width: 40px;
+    height: 43px;
+    background: #9c9c9c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wppool-add-shipping-accordion-delete-btn:hover{
+    background: #c1bfbf;
+}
+.wppool-add-shipping-accordion-content{
+    overflow: hidden;
+    padding: 20px;
+}
+
+.wppool-add-shipping-accordion-label p, .wppool-add-shipping-product-price p{
+    margin: 0;
+    padding: 0;
+}
+
+.wppool-add-new-shipping-button{
+    text-align: center;
+}
+.wppool-add-new-shipping-button #wppool-add-shipping {
+    display: inline-block;
+    padding: 10px 30px;
+    background: #fff;
+    margin-top: 20px;
+    margin-bottom: 0;
+    border: 1px solid #444;
+    border-radius: 30px;
+    cursor: pointer;
+}
+.wppool-add-new-shipping-button #wppool-add-shipping:hover{
+    background: #dfdfdf;
+}
+.kdactive{
+    border-bottom: 1px solid rgb(169 169 169);
+}
+
+.portlet-placeholder {
+    margin: 0 1em 1em 0;
+    height: 80px;
+  }
+.wppool-add-shipping-accordion-title{
+    display: flex;
+    align-items: center;
+}
+.wppool-add-shipping-accordion-title img{
+    width: 25px;
+}
+.wppool-add-shipping-accordion-title .sort{
+    cursor: move;
+    display: flex;
+    align-items: center;
+}
+.wppool-add-shipping-accordion-title .sort::before {
+    content: "\f333";
+    font-family: Dashicons;
+    text-align: center;
+    line-height: 26px;
+    color: #666;
+    display: block;
+    width: 20px;
+    float: left;
+    height: 100%;
+    font-size: 20px;
+}
+
+/* Accordion Inner Tabs */
+.wppool-shipping-inner-tabs{
+    display: flex;
+}
+
+.wppool-shipping-inner-tabs ul{
+    width: 250px;
+    background: #ddd;
+    box-shadow: none;
+    border-right: 1px solid #a7a7a7;
+}
+
+.wppool-qs-inner-tab-button li:hover,
+.wppool-qs-inner-tab-button .inner-active{
+    border-color: #9B5C8F;
+}
+
+.wppool-qs-inner-tab-button li a:hover, 
+.wppool-qs-inner-tab-button .inner-active a{
+    color: #9B5C8F;
+}
+
+.wppool-qs-inner-tab-content .tab-item {
+    display: none;
+}
+.wppool-qs-inner-tab-content .tab-item.inner-active {
+    display: block;
+}
+
+.wppool-qs-inner-tab-content{
+    width: 100%;
+    padding: 20px 50px;
+}

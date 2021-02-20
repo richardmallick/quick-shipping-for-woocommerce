@@ -1,6 +1,6 @@
 
 
-<label class="WPTE_thankyou_custom_checkbox">
-      <input type="checkbox" id="WPTE_thankyou_custom_checkbox" name="WPTE_thankyou_custom_checkbox"> 
+<label class="wppool_qs_switch_checkbox">
+      <input type="checkbox" id="wppool_qs_switch_checkbox" name="wppool_qs_switch_checkbox"> 
       <i></i>
 </label>
