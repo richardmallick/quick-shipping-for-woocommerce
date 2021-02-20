@@ -6,7 +6,7 @@
 
     <div class="wppool-add-shipping-accordion">
         <div class="wppool-add-shipping-options" id="wppool-sortable">
-            <div class="wppool-add-shipping-area">
+            <div class="wppool-add-shipping-area" style="display: none;">
                 <div class="wppool-add-shipping-accordion-header">
                     <div class="wppool-add-shipping-accordion-title">
                         <div class="sort"> Label</div>
@@ -24,13 +24,35 @@
                             </ul>
                             <div class="wppool-qs-inner-tab-content ">
                                 <div id="basic-info" class="tab-item inner-active">
-                                    <h2> <i class="demo-icon icon-settings"></i> <?php echo  esc_html__('Basic Info', WPPOOL_QS_TEXTDOMAIN); ?></h2>
-                                    
+                                    <h2><i class="demo-icon icon-shipping"></i> <?php echo  esc_html__('Add Shipping Options', WPPOOL_QS_TEXTDOMAIN); ?></h2>
+                                    <div class="wppool-shipping-inner-options-area">
+                                        <div class="wppool-shipping-inner-options">
+
+                                            <div class="wppool-shipping-inner-options-header">
+                                                <div class="wppool-shipping-inner-options-label">
+                                                   <input type="text" name="shipping-option-label" placeholder="Label">
+                                                </div>
+                                                <div class="wppool-shipping-inner-options-price">
+                                                   <input type="number" name="shipping-product-price" placeholder="Price">
+                                                </div>
+                                                <div class="wppool-shipping-inner-options-add">
+                                                    <i class="demo-icon icon-ok"></i>
+                                                </div>
+                                                <div class="wppool-shipping-inner-options-delete-btn">
+                                                    <i class="demo-icon icon-cancel"></i>
+                                                </div>
+                                                <div class="wppool-shipping-inner-options-title">
+                                                    <div class="sort"></div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
                                 </div>
                                 <div id="display-role" class="tab-item ">
                                     <h2> <i class="demo-icon icon-shipping"></i> <?php echo  esc_html__('Display Role', WPPOOL_QS_TEXTDOMAIN); ?></h2>
                                     <hr>
-                                  
+
                                 </div>
                             </div>
 

@@ -197,7 +197,7 @@
 .wppool-add-shipping-area{
     overflow: hidden;
     border: 1px solid rgb(169 169 169);
-    background: #ddd;
+    background: #fff;
     margin-bottom: 15px;
 }
 .wppool-add-shipping-accordion-header{
@@ -206,17 +206,19 @@
     padding-left: 7px;
     font-size: 14px;
     cursor: pointer;
+    align-items: center;
 }
 .wppool-add-shipping-accordion-header:hover{
-    background: #cecece;
+    background: #99999926;
 }
 .wppool-add-shipping-accordion-delete-btn{
     width: 40px;
     height: 43px;
-    background: #9c9c9c;
+    background: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-left: 1px solid rgb(169 169 169);
 }
 .wppool-add-shipping-accordion-delete-btn:hover{
     background: #c1bfbf;
@@ -262,12 +264,14 @@
 .wppool-add-shipping-accordion-title img{
     width: 25px;
 }
-.wppool-add-shipping-accordion-title .sort{
+.wppool-add-shipping-accordion-title .sort,
+.wppool-shipping-inner-options-title .sort{
     cursor: move;
     display: flex;
     align-items: center;
 }
-.wppool-add-shipping-accordion-title .sort::before {
+.wppool-add-shipping-accordion-title .sort::before,
+.wppool-shipping-inner-options-title .sort::before {
     content: "\f333";
     font-family: Dashicons;
     text-align: center;
@@ -285,9 +289,8 @@
     display: flex;
 }
 
-.wppool-shipping-inner-tabs ul{
-    width: 250px;
-    background: #ddd;
+.wppool-qs-tabs .wppool-shipping-inner-tabs .wppool-qs-inner-tab-button{
+    min-width: 180px;
     box-shadow: none;
     border-right: 1px solid #a7a7a7;
 }
@@ -311,5 +314,44 @@
 
 .wppool-qs-inner-tab-content{
     width: 100%;
-    padding: 20px 50px;
+    padding: 0;
 }
+
+/* Inner Accordion */
+.wppool-shipping-inner-options-area{
+    background: #fff;
+    padding: 16px 15px 1px 15px;
+}
+.wppool-shipping-inner-options-header{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.wppool-shipping-inner-options-header input[type=text]{
+    margin-top: 0;
+}
+.wppool-shipping-inner-options-add, 
+.wppool-shipping-inner-options-delete-btn{
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid;
+    cursor: pointer;
+}
+.wppool-shipping-inner-options-add{
+    background: #449be5;
+    border-color: #3e8ed4;
+}
+.wppool-shipping-inner-options-delete-btn{
+    background: #f44336;
+    border-color: #c3352b;
+}
+.wppool-shipping-inner-options-title{
+    border: 1px solid;
+    border-color: #bebebe;
+    border-radius: 5px;
+    padding: 1px 4px;
+}
+
+

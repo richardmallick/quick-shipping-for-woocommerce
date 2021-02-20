@@ -72,8 +72,9 @@
     var wrapper         = $(".wppool-add-shipping-options"); //Fields wrapper
     var add_field      = $("#wppool-add-shipping"); //Add button ID
 
+    var i = 0;
 
-    $(add_field).on('click', function(){
+    $(add_field).on('click', function(e){
          $(wrapper).append(`<div class="wppool-add-shipping-area">
          <div class="wppool-add-shipping-accordion-header kdactive">
              <div class="wppool-add-shipping-accordion-title">
@@ -87,15 +88,36 @@
              <div class="wppool-add-shipping-accordion-details">
                  <div class="wppool-shipping-inner-tabs">
                      <ul class="wppool-qs-inner-tab-button">
-                         <li class="btn inner-active"><a href="#basic-info"><i class="demo-icon icon-settings"></i> Basic Info</a></li>
-                         <li class="btn"><a href="#display-role"><i class="demo-icon icon-shipping"></i> Display Role</a></li>
+                         <li class="btn inner-active"><a href="#basic-info-${i}"><i class="demo-icon icon-settings"></i> Basic Info</a></li>
+                         <li class="btn"><a href="#display-role-${i}"><i class="demo-icon icon-shipping"></i> Display Role</a></li>
                      </ul>
                      <div class="wppool-qs-inner-tab-content ">
-                         <div id="basic-info" class="tab-item inner-active">
-                             <h2> <i class="demo-icon icon-settings"></i> Basic Info</h2>
-                             
+                         <div id="basic-info-${i}" class="tab-item inner-active">
+                             <h2><i class="demo-icon icon-shipping"></i>  Add Shipping Options</h2>
+                             <div class="wppool-shipping-inner-options-area">
+                                <div class="wppool-shipping-inner-options-${i}">
+                                    <div class="wppool-shipping-inner-options-header">
+                                        <div class="wppool-shipping-inner-options-label">
+                                            <input type="text" name="shipping-option-label" placeholder="Label">
+                                        </div>
+                                        <div class="wppool-shipping-inner-options-price">
+                                            <input type="text" name="shipping-product-price" placeholder="Price">
+                                        </div>
+                                        <div class="wppool-shipping-inner-options-add"  data-id="${i}">
+                                            <i class="demo-icon icon-ok"></i>
+                                        </div>
+                                        <div class="wppool-shipping-inner-options-delete-btn">
+                                            <i class="demo-icon icon-cancel"></i>
+                                        </div>
+                                        <div class="wppool-shipping-inner-options-title">
+                                            <div class="sort"></div>
+                                        </div>
+                                    </div>
+
+                                </div>
                          </div>
-                         <div id="display-role" class="tab-item ">
+                         </div>
+                         <div id="display-role-${i}" class="tab-item ">
                              <h2> <i class="demo-icon icon-shipping"></i>Display Role</h2>
                              <hr>
                            
@@ -106,12 +128,43 @@
              </div>
          </div>
      </div>`); //add input box
+     i++;
     });
 
+    
     $(wrapper).on("click",".wppool-add-shipping-accordion-delete-btn", function(e){ //user click on remove text
-         e.preventDefault(); 
-         $(this).parent().parent('div').remove();
-     });
+        e.preventDefault(); 
+        $(this).parent().parent('div').remove();
+    });
+
+    // Inner Shipping Options
+
+    $(wrapper).on('click', ".wppool-shipping-inner-options-add", function(){
+
+        var id = $(this).data('id');
+
+        var add_shipping_options_wrapper = $(`.wppool-shipping-inner-options-${id}`);
+
+        $(add_shipping_options_wrapper).append(`<div class="wppool-shipping-inner-options-header">
+            <div class="wppool-shipping-inner-options-label">
+               <input type="text" name="shipping-option-label" placeholder="Label">
+            </div>
+            <div class="wppool-shipping-inner-options-price">
+               <input type="number" name="shipping-product-price" placeholder="Price">
+            </div>
+            <div class="wppool-shipping-inner-options-add" data-id="${id}">
+                <i class="demo-icon icon-ok"></i>
+            </div>
+            <div class="wppool-shipping-inner-options-delete-btn">
+                <i class="demo-icon icon-cancel"></i>
+            </div>
+            <div class="wppool-shipping-inner-options-title">
+                <div class="sort"></div>
+            </div>
+        </div>`);
+
+    });
+
 
      // Shortable
      $( function() {
