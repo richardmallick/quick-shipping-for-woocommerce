@@ -72,7 +72,9 @@
     var wrapper         = $(".wppool-add-shipping-options"); //Fields wrapper
     var add_field      = $("#wppool-add-shipping"); //Add button ID
 
-    var i = 0;
+    var i = WPPOOL_ASSETS.wppoolIds;
+
+    console.log(i);
 
     $(add_field).on('click', function(e){
          $(wrapper).append(`<div class="wppool-add-shipping-area">

@@ -4,34 +4,32 @@ if (isset($_POST['submit'])) {
     $ids = $_POST['add_shipping_hiden_id'];
     update_option('quick_shipping_id', $ids);
 
-    foreach ($ids as $id) {
-        $shipping_name[] = $_POST["shipping-option-label-$id"];
-        $shipping_price[] = $_POST["shipping-product-price-$id"];
+    if ( $ids ){
+        foreach ($ids as $id) {
+            $shipping_name[]  = $_POST["shipping-option-label-$id"];
+            $shipping_price[] = $_POST["shipping-product-price-$id"];
+        }
+    
+        update_option('shipping-option-label', $shipping_name);
+        update_option('shipping-product-price', $shipping_price);
     }
-
-    update_option('shipping-option-label', $shipping_name);
-    update_option('shipping-product-price', $shipping_price);
+   
 }
 
-$shipping_ids = get_option('quick_shipping_id');
+$shipping_ids           = get_option('quick_shipping_id');
 $shipping_options_label = get_option('shipping-option-label');
 $shipping_options_price = get_option('shipping-product-price');
+$wppool_id_count        = count($shipping_ids);
 
-
-
-echo "<pre>";
-print_r($shipping_repeater_datas);
-echo "</pre>";
-
-
+wp_localize_script( 'wppool-qs-admin-js', 'WPPOOL_ASSETS', [ 'wppoolIds' => $wppool_id_count] );
 
 ?>
 
-
-
 <form action="" method="POST">
-    <h2> <i class="demo-icon icon-shipping"></i> <?php echo  esc_html__('Add Shipping', WPPOOL_QS_TEXTDOMAIN); ?></h2>
-    <input type="submit" name="submit" value="Submit">
+    <div class="wppool-qs-add-shipping-header">
+        <h2> <i class="demo-icon icon-shipping"></i> <?php echo  esc_html__('Add Shipping', WPPOOL_QS_TEXTDOMAIN); ?></h2>
+        <button class="button-primary" type="submit" name="submit">Save Changes</button>
+    </div>
     <hr>
     <div class="wppool-tab-content">
         <div class="wppool-shipping-details">
@@ -39,14 +37,10 @@ echo "</pre>";
                 <label for="quick-shipping-title">Title</label><br>
                 <input type="text" name="quick-shipping-title" id="quick-shipping-title">
             </div>
-
             <div class="wppool-add-shipping-accordion">
                 <div class="wppool-add-shipping-options" id="wppool-sortable">
-
-
-
-
                     <?php
+                    if ( $shipping_ids ):
                     foreach ($shipping_ids as $shipping_id) :
                     ?>
                         <div class="wppool-add-shipping-area">
@@ -67,12 +61,10 @@ echo "</pre>";
                                             <li class="btn"><a href="#display-role-<?php echo $shipping_id; ?>"><i class="demo-icon icon-shipping"></i> <?php echo  esc_html__('Display Role', WPPOOL_QS_TEXTDOMAIN); ?></a></li>
                                         </ul>
                                         <div class="wppool-qs-inner-tab-content ">
-                                            <div id="basic-info" class="tab-item inner-active">
+                                            <div id="basic-info-<?php echo $shipping_id; ?>" class="tab-item inner-active">
                                                 <h2><i class="demo-icon icon-shipping"></i> <?php echo  esc_html__('Add Shipping Options', WPPOOL_QS_TEXTDOMAIN); ?></h2>
                                                 <div class="wppool-shipping-inner-options-area">
                                                     <div class="wppool-shipping-inner-options-<?php echo $shipping_id; ?>">
-
-
                                                         <?php
                                                         $_count = count($shipping_options_label[$shipping_id]);
                                                         for ($i = 0; $i < $_count; $i++) :
@@ -105,10 +97,6 @@ echo "</pre>";
                                                                 </div>
                                                             </div>
                                                         <?php endfor; ?>
-
-
-
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -123,16 +111,9 @@ echo "</pre>";
                                 </div>
                             </div>
                         </div>
-                    <?php endforeach; ?>
-
-
-
-
-
-
-
-
-
+                    <?php 
+                        endforeach; 
+                    endif;?>
                 </div>
                 <div class="wppool-add-new-shipping-button">
                     <h2 id="wppool-add-shipping">Add Field</h2>

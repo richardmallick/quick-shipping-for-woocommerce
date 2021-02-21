@@ -359,4 +359,12 @@
     padding: 1px 4px;
 }
 
+/* add Shipping tabs content header */
+
+.wppool-qs-add-shipping-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 
