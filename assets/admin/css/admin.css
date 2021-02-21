@@ -332,7 +332,8 @@
     margin-top: 0;
 }
 .wppool-shipping-inner-options-add, 
-.wppool-shipping-inner-options-delete-btn{
+.wppool-shipping-inner-options-delete-btn,
+.wppool-shipping-inner-options-delete-btn-d{
     color: #fff;
     padding: 5px;
     border-radius: 5px;
@@ -346,6 +347,10 @@
 .wppool-shipping-inner-options-delete-btn{
     background: #f44336;
     border-color: #c3352b;
+}
+.wppool-shipping-inner-options-delete-btn-d{
+    background: #8f6461;
+    border-color: #8f6461;
 }
 .wppool-shipping-inner-options-title{
     border: 1px solid;

@@ -86,6 +86,7 @@
          </div>
          <div class="wppool-add-shipping-accordion-content">
              <div class="wppool-add-shipping-accordion-details">
+                <input type="hidden" name="add_shipping_hiden_id[]" value="${i}" />
                  <div class="wppool-shipping-inner-tabs">
                      <ul class="wppool-qs-inner-tab-button">
                          <li class="btn inner-active"><a href="#basic-info-${i}"><i class="demo-icon icon-settings"></i> Basic Info</a></li>
@@ -98,15 +99,15 @@
                                 <div class="wppool-shipping-inner-options-${i}">
                                     <div class="wppool-shipping-inner-options-header">
                                         <div class="wppool-shipping-inner-options-label">
-                                            <input type="text" name="shipping-option-label" placeholder="Label">
+                                            <input type="text" name="shipping-option-label-${i}[]" placeholder="Label">
                                         </div>
                                         <div class="wppool-shipping-inner-options-price">
-                                            <input type="text" name="shipping-product-price" placeholder="Price">
+                                            <input type="text" name="shipping-product-price-${i}[]" placeholder="Price">
                                         </div>
                                         <div class="wppool-shipping-inner-options-add"  data-id="${i}">
                                             <i class="demo-icon icon-ok"></i>
                                         </div>
-                                        <div class="wppool-shipping-inner-options-delete-btn">
+                                        <div class="wppool-shipping-inner-options-delete-btn-d">
                                             <i class="demo-icon icon-cancel"></i>
                                         </div>
                                         <div class="wppool-shipping-inner-options-title">
@@ -132,6 +133,9 @@
     });
 
     
+    $(wrapper).on("click",".wppool-shipping-inner-options-delete-btn-d", function(e){ //user click on remove text
+        alert("Opss! can't Remove this field");
+    });
     $(wrapper).on("click",".wppool-add-shipping-accordion-delete-btn", function(e){ //user click on remove text
         e.preventDefault(); 
         $(this).parent().parent('div').remove();
@@ -147,15 +151,15 @@
 
         $(add_shipping_options_wrapper).append(`<div class="wppool-shipping-inner-options-header">
             <div class="wppool-shipping-inner-options-label">
-               <input type="text" name="shipping-option-label" placeholder="Label">
+               <input type="text" name="shipping-option-label-${id}[]" placeholder="Label">
             </div>
             <div class="wppool-shipping-inner-options-price">
-               <input type="number" name="shipping-product-price" placeholder="Price">
+               <input type="number" name="shipping-product-price-${id}[]" placeholder="Price">
             </div>
             <div class="wppool-shipping-inner-options-add" data-id="${id}">
                 <i class="demo-icon icon-ok"></i>
             </div>
-            <div class="wppool-shipping-inner-options-delete-btn">
+            <div class="wppool-shipping-inner-options-delete-btn"  data-id="${id}">
                 <i class="demo-icon icon-cancel"></i>
             </div>
             <div class="wppool-shipping-inner-options-title">
@@ -163,6 +167,16 @@
             </div>
         </div>`);
 
+    });
+
+    $(wrapper).on("click",".wppool-shipping-inner-options-delete-btn", function(e){ //user click on remove text
+        e.preventDefault(); 
+
+        var id = $(this).data('id');
+
+        var add_shipping_options_wrapper = $(`.wppool-shipping-inner-options-${id}`);
+
+        $(this).parent(add_shipping_options_wrapper).remove();
     });
 
 

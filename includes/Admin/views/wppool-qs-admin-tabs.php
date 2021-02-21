@@ -27,9 +27,7 @@
 						</div>
 					</div>
 					<div id="shipping" class="tab-item active">
-						<h2> <i class="demo-icon icon-shipping"></i> <?php echo  esc_html__('Add Shipping', WPPOOL_QS_TEXTDOMAIN); ?></h2>
-						<hr>
-						<div class="wppool-tab-content">
+
 							<?php
 								if (file_exists(__DIR__ . "/wppool-qs-add-shipping.php")) {
 
@@ -37,7 +35,6 @@
 
 								}
 							?>
-						</div>
 					</div>
 					<div id="style" class="tab-item active">
 						<h2> <i class="demo-icon icon-ok"></i> <?php echo  esc_html__('Customize', WPPOOL_QS_TEXTDOMAIN); ?></h2>
