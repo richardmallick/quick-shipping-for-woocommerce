@@ -9,19 +9,24 @@ if (isset($_POST['submit'])) {
             $shipping_name[]  = $_POST["shipping-option-label-$id"];
             $shipping_price[] = $_POST["shipping-product-price-$id"];
         }
-    
+        $shipping_title  = $_POST["wppool-qs-title"];
+
+        update_option('wppool-qs-title', $shipping_title);
         update_option('shipping-option-label', $shipping_name);
         update_option('shipping-product-price', $shipping_price);
+       
     }
    
 }
 
 $shipping_ids           = get_option('quick_shipping_id');
+$shipping_title         = get_option('wppool-qs-title');
 $shipping_options_label = get_option('shipping-option-label');
 $shipping_options_price = get_option('shipping-product-price');
-$wppool_id_count        = count($shipping_ids);
+$wppool_id_count        = $shipping_ids ? count($shipping_ids) : 0;
 
 wp_localize_script( 'wppool-qs-admin-js', 'WPPOOL_ASSETS', [ 'wppoolIds' => $wppool_id_count] );
+
 
 ?>
 
@@ -41,12 +46,14 @@ wp_localize_script( 'wppool-qs-admin-js', 'WPPOOL_ASSETS', [ 'wppoolIds' => $wpp
                 <div class="wppool-add-shipping-options" id="wppool-sortable">
                     <?php
                     if ( $shipping_ids ):
-                    foreach ($shipping_ids as $shipping_id) :
+                    foreach ($shipping_ids as $shipping_id => $id ) :
+
                     ?>
                         <div class="wppool-add-shipping-area">
                             <div class="wppool-add-shipping-accordion-header">
                                 <div class="wppool-add-shipping-accordion-title">
-                                    <div class="sort"> Label</div>
+                                    <span class="sort"></span>
+                                    <input class="wppool-qs-title" type="text" name="wppool-qs-title[]" placeholder="Title" value="<?php echo esc_html($shipping_title[$shipping_id]); ?>"/>
                                 </div>
                                 <div class="wppool-add-shipping-accordion-delete-btn">
                                     <i class="demo-icon icon-cancel"></i>
@@ -64,7 +71,7 @@ wp_localize_script( 'wppool-qs-admin-js', 'WPPOOL_ASSETS', [ 'wppoolIds' => $wpp
                                             <div id="basic-info-<?php echo $shipping_id; ?>" class="tab-item inner-active">
                                                 <h2><i class="demo-icon icon-shipping"></i> <?php echo  esc_html__('Add Shipping Options', WPPOOL_QS_TEXTDOMAIN); ?></h2>
                                                 <div class="wppool-shipping-inner-options-area">
-                                                    <div class="wppool-shipping-inner-options-<?php echo $shipping_id; ?>">
+                                                    <div class="wppool-shipping-inner-options-<?php echo $shipping_id; ?>" id="innser-sortable-<?php echo $shipping_id; ?>">
                                                         <?php
                                                         $_count = count($shipping_options_label[$shipping_id]);
                                                         for ($i = 0; $i < $_count; $i++) :
@@ -92,8 +99,8 @@ wp_localize_script( 'wppool-qs-admin-js', 'WPPOOL_ASSETS', [ 'wppoolIds' => $wpp
                                                                     </div>
                                                                 <?php } ?>
 
-                                                                <div class="wppool-shipping-inner-options-title">
-                                                                    <div class="sort"></div>
+                                                                <div class="wppool-shipping-inner-options-title"  data-id="<?php echo $shipping_id; ?>">
+                                                                    <div class="sort sort-<?php echo $shipping_id; ?>"></div>
                                                                 </div>
                                                             </div>
                                                         <?php endfor; ?>

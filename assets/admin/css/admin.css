@@ -181,6 +181,10 @@
     margin-bottom: 20px;
 }
 
+.wppool-qs-title{
+    margin: 0 10px !important;
+}
+
 .wppool-shipping-details input[type=text], 
 .wppool-shipping-details input[type=number]{
     margin-top: 8px;

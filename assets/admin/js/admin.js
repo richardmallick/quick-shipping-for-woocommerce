@@ -70,17 +70,16 @@
 
     // Add Files
     var wrapper         = $(".wppool-add-shipping-options"); //Fields wrapper
-    var add_field      = $("#wppool-add-shipping"); //Add button ID
+    var add_field       = $("#wppool-add-shipping"); //Add button ID
 
     var i = WPPOOL_ASSETS.wppoolIds;
-
-    console.log(i);
 
     $(add_field).on('click', function(e){
          $(wrapper).append(`<div class="wppool-add-shipping-area">
          <div class="wppool-add-shipping-accordion-header kdactive">
              <div class="wppool-add-shipping-accordion-title">
-                 <div class="sort"> Label</div>
+                <span class="sort"></span>
+                <input class="wppool-qs-title" type="text" name="wppool-qs-title[]" placeholder="Title"/>
              </div>
              <div class="wppool-add-shipping-accordion-delete-btn">
                  <i class="demo-icon icon-cancel"></i>
@@ -98,7 +97,7 @@
                          <div id="basic-info-${i}" class="tab-item inner-active">
                              <h2><i class="demo-icon icon-shipping"></i>  Add Shipping Options</h2>
                              <div class="wppool-shipping-inner-options-area">
-                                <div class="wppool-shipping-inner-options-${i}">
+                                <div class="wppool-shipping-inner-options-${i}" id="innser-sortable-${i}">
                                     <div class="wppool-shipping-inner-options-header">
                                         <div class="wppool-shipping-inner-options-label">
                                             <input type="text" name="shipping-option-label-${i}[]" placeholder="Label">
@@ -106,14 +105,14 @@
                                         <div class="wppool-shipping-inner-options-price">
                                             <input type="text" name="shipping-product-price-${i}[]" placeholder="Price">
                                         </div>
-                                        <div class="wppool-shipping-inner-options-add"  data-id="${i}">
+                                        <div class="wppool-shipping-inner-options-add" data-id="${i}">
                                             <i class="demo-icon icon-ok"></i>
                                         </div>
                                         <div class="wppool-shipping-inner-options-delete-btn-d">
                                             <i class="demo-icon icon-cancel"></i>
                                         </div>
-                                        <div class="wppool-shipping-inner-options-title">
-                                            <div class="sort"></div>
+                                        <div class="wppool-shipping-inner-options-title" data-id="${i}">
+                                            <div class="sort sort-${i}"></div>
                                         </div>
                                     </div>
 
@@ -161,11 +160,11 @@
             <div class="wppool-shipping-inner-options-add" data-id="${id}">
                 <i class="demo-icon icon-ok"></i>
             </div>
-            <div class="wppool-shipping-inner-options-delete-btn"  data-id="${id}">
+            <div class="wppool-shipping-inner-options-delete-btn" data-id="${id}">
                 <i class="demo-icon icon-cancel"></i>
             </div>
-            <div class="wppool-shipping-inner-options-title">
-                <div class="sort"></div>
+            <div class="wppool-shipping-inner-options-title" data-id="${id}">
+                <div class="sort  sort-${id}"></div>
             </div>
         </div>`);
 
@@ -179,10 +178,11 @@
         var add_shipping_options_wrapper = $(`.wppool-shipping-inner-options-${id}`);
 
         $(this).parent(add_shipping_options_wrapper).remove();
+
     });
 
 
-     // Shortable
+     // Accordion Shortable
      $( function() {
         $( ".wppool-add-shipping-options" ).sortable({
           connectWith: ".wppool-add-shipping-options",
@@ -199,6 +199,33 @@
         $( "#wppool-sortable" ).disableSelection();
       } );
 
+    
+    // Inner Shortable
+    var InnerWraper = $(".wppool-shipping-inner-options-area");
+    InnerWraper.on('mousedown', '.wppool-shipping-inner-options-title', function(){
+        var id = $(this).data('id');
+        setTimeout(function() {
+            $( function() {
+                InnerWraper.sortable({
+                  connectWith: `.wppool-shipping-inner-options-area`,
+                  handle: `.wppool-shipping-inner-options-title .sort-${id}`,
+                  cancel: `.wppool-shipping-inner-options-${id}`,
+                  placeholder: "portlet-placeholder"
+                });
+        
+              } );
+
+              $( function() {
+                $( `#innser-sortable-${id}` ).sortable();
+                $( `#innser-sortable-${id}` ).disableSelection();
+              } );
+
+         }, 300);
+    });
+
+   
+
+   
 
 })(jQuery);
 

@@ -17,11 +17,6 @@ if ( ! defined('ABSPATH') ) {
 }
 
 /**
- * Included Autoload File
- */
-require_once __DIR__ . "/vendor/autoload.php";
-
-/**
  * The main Plugin Class
  */
 final class wppool_quick_shipping {
