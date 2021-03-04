@@ -88,7 +88,9 @@
     width: 100%;
     padding: 20px 50px;
     background: #fff;
-    box-shadow: 0 8px 21px 0 rgba(0,0,0,.1);  
+    box-shadow: 0 8px 21px 0 rgba(0,0,0,.1);
+    box-sizing: border-box;
+    overflow: hidden;  
 }
 
 .wppool-qs-tab-content .tab-item{
@@ -187,7 +189,8 @@
 
 .wppool-shipping-details input[type=text], 
 .wppool-shipping-details input[type=number]{
-    margin-top: 8px;
+    /* margin-top: 8px; */
+    width: 100%;
 }
 
 .wppool-add-shipping-accordion{
@@ -294,7 +297,7 @@
 }
 
 .wppool-qs-tabs .wppool-shipping-inner-tabs .wppool-qs-inner-tab-button{
-    min-width: 180px;
+    min-width: 160px;
     box-shadow: none;
     border-right: 1px solid #a7a7a7;
 }
@@ -334,6 +337,7 @@
 }
 .wppool-shipping-inner-options-header input[type=text]{
     margin-top: 0;
+    width: 100%;
 }
 .wppool-shipping-inner-options-add, 
 .wppool-shipping-inner-options-delete-btn,
