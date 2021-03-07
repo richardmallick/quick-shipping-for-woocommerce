@@ -269,6 +269,7 @@
          }, 300);
     });
 
+    
 
     $(wrapper).on( 'change', '.wppool_condition',function() {
          var cSelected = $(this).find(":selected").val();
