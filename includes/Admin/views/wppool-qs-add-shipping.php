@@ -10,8 +10,19 @@ if (isset($_POST['submit'])) {
             $shipping_price[]      = $_POST["shipping-product-price-$id"];
             $wppool_qs_condition[] = $_POST["wppool_qs_condition-$id"];
             $wppool_product_cat[]  = $_POST["wppool_product_cat-$id"];
-            $wppool_product[]  = $_POST["wppool_product-$id"];
+            $wppool_product[]      = $_POST["wppool_product-$id"];
+            $condition             = $wppool_qs_condition[$id][0];
 
+            if ( $condition == 'category' ){
+                update_option('wppool-product-cat', $wppool_product_cat);
+            }else{
+                update_option('wppool-product-cat', '');
+            }
+            if ( $condition == 'products' ){
+                update_option('wppool-product', $wppool_produc);
+            }else{
+                update_option('wppool-product', '');
+            }
         }
         $shipping_title  = $_POST["wppool-qs-title"];
         // Save all data to database
@@ -24,22 +35,6 @@ if (isset($_POST['submit'])) {
 
         update_option('wppool-product', $wppool_product);
 
-        // if ( $wppool_qs_condition ){
-
-        //     foreach ( $wppool_qs_condition as $condition ){
-
-        //         if ( $condition[0] == 'category' ){
-                    
-        //         }else{
-        //             update_option('wppool-product-cat', '');
-        //         }
-        //         if ( $condition[0] == 'products' ){
-                    
-        //         }else{
-        //             update_option('wppool-product', '');
-        //         }
-        //     }
-        // }   
     }
 }
 // Get all data from database
@@ -50,6 +45,23 @@ $shipping_options_price = get_option('shipping-product-price');
 $shipping_condition     = get_option('wppool-qs-condition');
 $shipping_categories    = get_option('wppool-product-cat');
 $shipping_products      = get_option('wppool-product');
+
+$arrg = [];
+foreach ( $shipping_ids  as $key => $shipping_id ){
+    $arrg[] = [
+        "id" => $shipping_ids[$key],
+        "title" => $shipping_title[$key],
+        "label" => $shipping_options_label[$key],
+        "price" => $shipping_options_price[$key],
+        "condition" => $shipping_condition[$key],
+        "categoryies" => $shipping_categories[$key],
+        "products" => $shipping_products[$key]
+    ];
+}
+
+echo "<pre>";
+print_r($arrg);
+echo "</pre>";
 
 //Count Shipping I
 $wppool_id_count        = $shipping_ids ? count($shipping_ids) : 0;
@@ -169,7 +181,15 @@ wp_localize_script( 'wppool-qs-admin-js', 'WPPOOL_ASSETS', [ 'wppoolIds' => $wpp
                                                         </select>
                                                     </div>
                                                     <div class="wppool_qs_condition_dependency">
-                                                        <div class="wppool_product_categorise condition-active" id="wppool_product_categorise_<?php echo $shipping_id; ?>">
+                                                        <?php 
+                                                        $activeCategory = $activeProduct = '';
+                                                        if ( $shipping_condition[$shipping_id][0] == 'category' ){
+                                                            $activeCategory = 'condition-active';
+                                                        } else {
+                                                            $activeProduct = 'condition-active';
+                                                        }
+                                                        ?>
+                                                        <div class="wppool_product_categorise <?php echo $activeCategory; ?>" id="wppool_product_categorise_<?php echo $shipping_id; ?>">
                                                             <label for="wppool_product_cat"><?php echo __("Categories", WPPOOL_QS_TEXTDOMAIN); ?></label>
                                         
                                                             <select name="wppool_product_cat-<?php echo $shipping_id; ?>[]" class="wppool_product_cat"  multiple="multiple">
@@ -183,7 +203,7 @@ wp_localize_script( 'wppool-qs-admin-js', 'WPPOOL_ASSETS', [ 'wppoolIds' => $wpp
                                                                 <?php endforeach; ?>
                                                             </select>
                                                         </div>
-                                                        <div class="wppool_condition_products" id="wppool_condition_products_<?php echo $shipping_id; ?>">
+                                                        <div class="wppool_condition_products <?php echo $activeProduct; ?>" id="wppool_condition_products_<?php echo $shipping_id; ?>">
                                                             <label for="wppool_product_list"><?php echo __("Products", WPPOOL_QS_TEXTDOMAIN); ?></label>
 
                                                             <select name="wppool_product-<?php echo $shipping_id; ?>[]" class="wppool_product_list" multiple="multiple">
