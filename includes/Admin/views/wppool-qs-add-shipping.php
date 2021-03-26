@@ -1,70 +1,55 @@
 <?php
+
 if (isset($_POST['submit'])) {
 
     $ids = $_POST['add_shipping_hiden_id'];
     update_option('quick_shipping_id', $ids);
 
     if ( $ids ){
+
         foreach ($ids as $id) {
             $shipping_name[]       = $_POST["shipping-option-label-$id"];
             $shipping_price[]      = $_POST["shipping-product-price-$id"];
             $wppool_qs_condition[] = $_POST["wppool_qs_condition-$id"];
             $wppool_product_cat[]  = $_POST["wppool_product_cat-$id"];
             $wppool_product[]      = $_POST["wppool_product-$id"];
-            $condition             = $wppool_qs_condition[$id][0];
-
-            if ( $condition == 'category' ){
-                update_option('wppool-product-cat', $wppool_product_cat);
-            }else{
-                update_option('wppool-product-cat', '');
-            }
-            if ( $condition == 'products' ){
-                update_option('wppool-product', $wppool_produc);
-            }else{
-                update_option('wppool-product', '');
-            }
         }
-        $shipping_title  = $_POST["wppool-qs-title"];
-        // Save all data to database
-        update_option('wppool-qs-title', $shipping_title);
-        update_option('shipping-option-label', $shipping_name);
-        update_option('shipping-product-price', $shipping_price);
-        update_option('wppool-qs-condition', $wppool_qs_condition);
 
-        update_option('wppool-product-cat', $wppool_product_cat);
-
-        update_option('wppool-product', $wppool_product);
+        foreach ( $ids  as $key => $id ) {
+            $wppool_shipping_data[] = [
+                "id" =>  $key,
+                "title" => $_POST["wppool-qs-title"][$key],
+                "label" => $shipping_name[$key],
+                "price" => $shipping_price[$key],
+                "condition" => $wppool_qs_condition[$key],
+                "categoryies" => $wppool_product_cat[$key],
+                "products" => $wppool_product[$key]
+            ];
+        }
+    
+        $wppool_serialize_data = serialize( $wppool_shipping_data );
+        update_option('wppool_qs_all_data', $wppool_serialize_data);
 
     }
-}
-// Get all data from database
-$shipping_ids           = get_option('quick_shipping_id');
-$shipping_title         = get_option('wppool-qs-title');
-$shipping_options_label = get_option('shipping-option-label');
-$shipping_options_price = get_option('shipping-product-price');
-$shipping_condition     = get_option('wppool-qs-condition');
-$shipping_categories    = get_option('wppool-product-cat');
-$shipping_products      = get_option('wppool-product');
 
-$arrg = [];
-foreach ( $shipping_ids  as $key => $shipping_id ){
-    $arrg[] = [
-        "id" => $shipping_ids[$key],
-        "title" => $shipping_title[$key],
-        "label" => $shipping_options_label[$key],
-        "price" => $shipping_options_price[$key],
-        "condition" => $shipping_condition[$key],
-        "categoryies" => $shipping_categories[$key],
-        "products" => $shipping_products[$key]
-    ];
 }
 
-echo "<pre>";
-print_r($arrg);
-echo "</pre>";
+// Get Serialized Data from database
+$serialized_data = get_option('wppool_qs_all_data');
+$wppool_unserialize_data = unserialize( $serialized_data ); // Unserialized data
+
+// Get array column value
+$shipping_ids           = array_keys( $wppool_unserialize_data );
+$shipping_title         = array_column( $wppool_unserialize_data, 'title' );
+$shipping_options_label = array_column( $wppool_unserialize_data, 'label' );
+$shipping_options_price = array_column( $wppool_unserialize_data, 'price' );
+$shipping_condition     = array_column( $wppool_unserialize_data, 'condition' );
+$shipping_categories    = array_column( $wppool_unserialize_data, 'categoryies' );
+$shipping_products      = array_column( $wppool_unserialize_data, 'products' );
+
 
 //Count Shipping I
-$wppool_id_count        = $shipping_ids ? count($shipping_ids) : 0;
+$wppool_id_count        = $wppool_unserialize_data ? count($wppool_unserialize_data) : 0;
 
 // Get Categories
 $pCategories = get_terms( ['taxonomy' => 'product_cat'] );
@@ -84,6 +69,7 @@ $productsEncode = json_encode( $Products );
 $opstions = [
     'category', 'products'
 ];
+
 // Pass value to Jquery file
 wp_localize_script( 'wppool-qs-admin-js', 'WPPOOL_ASSETS', [ 'wppoolIds' => $wppool_id_count, 'productCat' => $categoryiesEncode, 'products' => $productsEncode ] );
 

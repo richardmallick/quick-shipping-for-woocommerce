@@ -250,23 +250,21 @@
     var InnerWraper = $(".wppool-shipping-inner-options-area");
     InnerWraper.on('mousedown', '.wppool-shipping-inner-options-title', function(){
         var id = $(this).data('id');
-        setTimeout(function() {
-            $( function() {
-                InnerWraper.sortable({
-                  connectWith: `.wppool-shipping-inner-options-area`,
-                  handle: `.wppool-shipping-inner-options-title .sort-${id}`,
-                  cancel: `.wppool-shipping-inner-options-${id}`,
-                  placeholder: "portlet-placeholder"
-                });
-        
-              } );
+        $( function() {
+                
+            InnerWraper.sortable({   
+              connectWith: `.wppool-shipping-inner-options-area`,
+              handle: `.wppool-shipping-inner-options-title .sort-${id}`,
+              cancel: `.wppool-shipping-inner-options-${id}`,
+              placeholder: "portlet-placeholder"
+            });
+    
+          } );
 
-              $( function() {
-                $( `#innser-sortable-${id}` ).sortable();
-                $( `#innser-sortable-${id}` ).disableSelection();
-              } );
-
-         }, 300);
+          $( function() {
+            $( `#innser-sortable-${id}` ).sortable();
+            $( `#innser-sortable-${id}` ).disableSelection();
+          } );
     });
 
     
