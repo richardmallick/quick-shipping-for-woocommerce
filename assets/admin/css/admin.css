@@ -421,3 +421,8 @@ select.wppool_condition {
 .wppool_qs_condition label{
     line-height: 3;
 }
+
+input.wppool-qs-main-title {
+    width: 25%;
+    margin-top: 20px;
+}

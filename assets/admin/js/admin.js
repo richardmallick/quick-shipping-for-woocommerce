@@ -146,9 +146,9 @@
                                 <div class="wppool-condition-area">
                                     <div class="wppool_qs_condition" >
                                         <label for="wppool_condition">Select</label>
-                                        <select name="wppool_condition-${i}" class="wppool_condition" data-id="${i}">
+                                        <select name="wppool_qs_condition[]" class="wppool_condition" data-id="${i}">
                                             <option value="category">Category</option>
-                                            <option value="product">Product</option>
+                                            <option value="products">Product</option>
                                         </select>
                                     </div>
                                     <div class="wppool_qs_condition_dependency">

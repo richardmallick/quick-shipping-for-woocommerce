@@ -10,7 +10,6 @@ if (isset($_POST['submit'])) {
         foreach ($ids as $id) {
             $shipping_name[]       = $_POST["shipping-option-label-$id"];
             $shipping_price[]      = $_POST["shipping-product-price-$id"];
-            $wppool_qs_condition[] = $_POST["wppool_qs_condition-$id"];
             $wppool_product_cat[]  = $_POST["wppool_product_cat-$id"];
             $wppool_product[]      = $_POST["wppool_product-$id"];
         }
@@ -18,10 +17,10 @@ if (isset($_POST['submit'])) {
         foreach ( $ids  as $key => $id ) {
             $wppool_shipping_data[] = [
                 "id" =>  $key,
-                "title" => $_POST["wppool-qs-title"][$key],
+                "title" => sanitize_text_field( $_POST["wppool-qs-title"][$key] ),
+                "condition" => sanitize_text_field( $_POST["wppool_qs_condition"][$key] ),
                 "label" => $shipping_name[$key],
                 "price" => $shipping_price[$key],
-                "condition" => $wppool_qs_condition[$key],
                 "categoryies" => $wppool_product_cat[$key],
                 "products" => $wppool_product[$key]
             ];
@@ -47,6 +46,9 @@ $shipping_condition     = array_column( $wppool_unserialize_data, 'condition' );
 $shipping_categories    = array_column( $wppool_unserialize_data, 'categoryies' );
 $shipping_products      = array_column( $wppool_unserialize_data, 'products' );
 
+// echo "<pre>";
+// print_r( $shipping_condition );
+// echo "</pre>";
 
 //Count Shipping I
 $wppool_id_count        = $wppool_unserialize_data ? count($wppool_unserialize_data) : 0;
@@ -156,11 +158,13 @@ wp_localize_script( 'wppool-qs-admin-js', 'WPPOOL_ASSETS', [ 'wppoolIds' => $wpp
                                                     <div class="wppool_qs_condition" >
                                                         <label for="wppool_condition"><?php echo __("Select", WPPOOL_QS_TEXTDOMAIN); ?></label>
                                                        
-                                                        <select name="wppool_qs_condition-<?php echo $shipping_id; ?>[]" class="wppool_condition" data-id="<?php echo $shipping_id; ?>">
+                                                        <select name="wppool_qs_condition[]" class="wppool_condition" data-id="<?php echo $shipping_id; ?>">
                                                             <?php 
                                                             foreach ( $opstions as $opstion ){  
                                                                 $_opstion = ucfirst($opstion);
-                                                                $selected = $shipping_condition[$shipping_id][0] == $opstion ? 'selected': '';
+                                                                $selected = $shipping_condition[$shipping_id] == $opstion ? 'selected': '';
+
+                                                                echo $shipping_condition[$shipping_id];
                                                             ?>
                                                                 <option value="<?php echo $opstion; ?>" <?php echo $selected; ?>><?php echo __($_opstion, WPPOOL_QS_TEXTDOMAIN); ?></option>
                                                             <?php } ?>
@@ -169,7 +173,7 @@ wp_localize_script( 'wppool-qs-admin-js', 'WPPOOL_ASSETS', [ 'wppoolIds' => $wpp
                                                     <div class="wppool_qs_condition_dependency">
                                                         <?php 
                                                         $activeCategory = $activeProduct = '';
-                                                        if ( $shipping_condition[$shipping_id][0] == 'category' ){
+                                                        if ( $shipping_condition[$shipping_id] == 'category' ){
                                                             $activeCategory = 'condition-active';
                                                         } else {
                                                             $activeProduct = 'condition-active';
